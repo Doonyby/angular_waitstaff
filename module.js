@@ -1,6 +1,5 @@
-angular.module('myApp' []);
-
-myApp.controller('myCtrl', function() {
+angular.module('myApp', [])
+	.controller('myCtrl', function() {
 
 });
 
