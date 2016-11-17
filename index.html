@@ -9,9 +9,20 @@
 	<script src="./module.js"></script>
 </head>
 <body ng-app="myApp">
+	<h1>Waitstaff Calculator</h1>
 	<div ng-controller="myCtrl as vm">
-		
+		<div id="mealDetails">
+			<h2>Enter the Meal Details</h2><hr>
+			<form>
+				<h5>Base Meal Price: $</h5><input type="number" />
+			</form>
+		</div>
+		<div id="customerCharges">
+			<h2>Customer Charges</h2><hr>
+		</div>
+		<div id="myEarnings">
+			<h2>My Earnings Info</h2><hr>
+		</div>
 	</div>
-	
 </body>
 </html>
