@@ -24,6 +24,13 @@ h1 {
 	margin-bottom: 60px;
 }
 
+button {
+	margin: 10px 10px;
+	width: 70px;
+	height: 20px;
+	border: 1px solid black;
+}
+
 .boxes {
 	width: 40%;
 	display: inline-block;
@@ -44,4 +51,19 @@ h1 {
 #myEarnings {
 	height: 240px;
 	margin-top: 20px;
+}
+
+#reset {
+	width: 100%;
+	text-align: right;
+	margin-top: 20px;
+	border: none;
+}
+
+#resetBtn {
+	margin-right: 50px;
+}
+
+form.ng-submitted .ng-invalid {
+	border: 1px solid red;
 }
