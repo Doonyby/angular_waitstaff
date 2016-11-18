@@ -18,22 +18,22 @@
 				<h4>Tax Rate: %<input type="number" name="taxRate" ng-model="vm.taxRate"  required/></h4><br>
 				<h4>Tip Percentage: %<input type="number" name="tipPercent" ng-model="vm.tipPercent" required/></h4><br>
 				<p ng-model=vm.errorExplanation ng-show="vm.redBox" style="color: red;">* Red boxes are required.</p>
-				<span><button type="submit" id="submitBtn">Submit</button><button id="cancelBtn" ng-click="vm.cancelMeal()">Cancel</button></span>		
+				<span><button type="submit" id="submitBtn">Submit</button><button type="reset" id="vm.cancelBtn" ng-click="vm.cancelMeal()">Cancel</button></span>		
 			</form>
 		</div>
 		<div class="boxes" id="customerCharges">
 			<h2>Customer Charges</h2><hr>
-			<h4>Subtotal: ${{ vm.custSubtotal }}</h4>
-			<h4>+ Tip: ${{ vm.custTip }}</h4><hr width="200px" style="margin-left: 200px;">
-			<h4>Total: ${{ vm.custTotal }}</h4>
+			<h4>Subtotal: ${{ vm.custSubtotal | number:2 }}</h4>
+			<h4>+ Tip: ${{ vm.custTip | number:2 }}</h4><hr width="200px" style="margin-left: 200px;">
+			<h4>Total: ${{ vm.custTotal | number:2 }}</h4>
 		</div>
 		<div class="boxes" id="myEarnings">
 			<h2>My Earnings Info</h2><hr>
-			<h4>Tip Total: ${{ vm.tipTotal }}</h4>
+			<h4>Tip Total: ${{ vm.tipTotal | number:2 }}</h4>
 			<h4>Meal Count: {{ vm.mealCount }}</h4>
-			<h4>Average Tip Per Meal: ${{ vm.avgTip }}</h4>
+			<h4>Average Tip Per Meal: ${{ vm.avgTip | number:2 }}</h4>
 		</div>
-		<div class="boxes" id="reset"><button id="resetBtn">Reset</button></div>
+		<div class="boxes" id="reset"><button id="resetBtn" ng-click="vm.reset()">Reset</button></div>
 	</section>
 </body>
 </html>
