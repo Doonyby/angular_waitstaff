@@ -1,5 +1,25 @@
-angular.module('myApp', [])
-	.controller('myCtrl', function() {
+angular.module('myApp', ['ngRoute'])
+	.config(['$routeProvider', function($routeProvider) {
+		$routeProvider.when('/', {
+            templateUrl : 'home.html',
+            controller : 'HomeCtrl',
+            controllerAs: 'vm'			
+		}).when('/meal', {
+			templateUrl : 'meal.html',
+            controller : 'MealCtrl',
+            controllerAs: 'vm'
+		}).when('/earnings', {
+			templateUrl : 'earnings.html',
+            controller : 'EarningsCtrl',
+            controllerAs: 'vm'
+		}).when('/error', {
+		    template : '<p>Error - Page Not Found</p>'
+		}).otherwise('/error');
+	}])
+	.controller('HomeCtrl', function() {
+		var vm = this;
+	})
+	.controller('MealCtrl', function() {
 		var vm = this;
 		vm.redBox = false;
 		vm.mealCount = 0;
@@ -31,7 +51,9 @@ angular.module('myApp', [])
 			vm.taxRate = "";
 			vm.tipPercent = "";
 		};
-		vm.reset = function() {
+
+	}).controller('EarningsCtrl', function() {
+			vm.reset = function() {
 			vm.redBox = false;
 			vm.mealCount = 0;
 			vm.tipTotal = 0;

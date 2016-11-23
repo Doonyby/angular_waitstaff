@@ -67,3 +67,7 @@ button {
 form.ng-submitted .ng-invalid {
 	border: 1px solid red;
 }
+
+a:not(:first-child) {
+  border-left:1px solid #000;
+}
