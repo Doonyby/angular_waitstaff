@@ -1,4 +1,4 @@
-angular.module('myApp', ['ngRoute'])
+angular.module('myApp', ['ngRoute', 'ngAnimate'])
 	.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/', {
             templateUrl : 'home.html',
@@ -16,55 +16,69 @@ angular.module('myApp', ['ngRoute'])
 		    template : '<p>Error - Page Not Found</p>'
 		}).otherwise('/error');
 	}])
-	.controller('HomeCtrl', function() {
-		var vm = this;
+	.run(function($rootScope, $location, $timeout) {
+	    $rootScope.$on('$routeChangeError', function() {
+	        $location.path("/error");
+	    });
+	    $rootScope.$on('$routeChangeStart', function() {
+	        $rootScope.isLoading = true;
+	    });
+	    $rootScope.$on('$routeChangeSuccess', function() {
+	      $timeout(function() {
+	        $rootScope.isLoading = false;
+	      }, 1000);
+	    });
 	})
-	.controller('MealCtrl', function() {
-		var vm = this;
-		vm.redBox = false;
-		vm.mealCount = 0;
-		vm.tipTotal = 0;
-		vm.formSubmit = function() {
-			if( vm.myForm.$valid ) {
+	.controller('HomeCtrl', ['$rootScope', function($rootScope) {
+
+	}])
+	.controller('MealCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+		
+		$rootScope.redBox = false;
+		$rootScope.mealCount = 0;
+		$rootScope.tipTotal = 0;
+		$rootScope.formSubmit = function() {
+			if( $rootScope.myForm.$valid ) {
 				console.log('form is valid');
-				vm.mealCount++;
-				var tax = vm.taxRate/100;
-				var tip = vm.tipPercent/100;
-				vm.custSubtotal = (vm.mealPrice * tax) + vm.mealPrice;
-				vm.custTip = vm.custSubtotal * tip;
-				vm.custTotal = vm.custSubtotal + vm.custTip;
-				vm.tipTotal += vm.custTip
-				vm.avgTip = (vm.tipTotal / vm.mealCount);
-				vm.mealPrice = "";
-				vm.taxRate = "";
-				vm.tipPercent = "";
-				vm.myForm.$setPristine();
+				$rootScope.mealCount++;
+				var tax = $rootScope.taxRate/100;
+				var tip = $rootScope.tipPercent/100;
+				$rootScope.custSubtotal = ($rootScope.mealPrice * tax) + $rootScope.mealPrice;
+				$rootScope.custTip = $rootScope.custSubtotal * tip;
+				$rootScope.custTotal = $rootScope.custSubtotal + $rootScope.custTip;
+				$rootScope.tipTotal += $rootScope.custTip
+				$rootScope.avgTip = ($rootScope.tipTotal / $rootScope.mealCount);
+				$rootScope.mealPrice = "";
+				$rootScope.taxRate = "";
+				$rootScope.tipPercent = "";
+				$rootScope.myForm.$setPristine();
 			} else {
 				console.log('form is not valid');
-				vm.redBox = true;
+				$rootScope.redBox = true;
 			}
 		};
-		vm.cancelMeal = function() {
-			vm.myForm.$setPristine();
-			vm.redBox = false;
-			vm.mealPrice = "";
-			vm.taxRate = "";
-			vm.tipPercent = "";
+		$rootScope.cancelMeal = function() {
+			$rootScope.myForm.$setPristine();
+			$rootScope.redBox = false;
+			$rootScope.mealPrice = "";
+			$rootScope.taxRate = "";
+			$rootScope.tipPercent = "";
 		};
 
-	}).controller('EarningsCtrl', function() {
-			vm.reset = function() {
-			vm.redBox = false;
-			vm.mealCount = 0;
-			vm.tipTotal = 0;
-			vm.mealPrice = "";
-			vm.taxRate = "";
-			vm.tipPercent = "";
-			vm.custSubtotal = "";
-			vm.custTip = "";
-			vm.custTotal = "";
-			vm.tipTotal = "";
-			vm.avgTip = "";			
+	}]).controller('EarningsCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+
+			$rootScope.reset = function() {
+			$rootScope.redBox = false;
+			$rootScope.mealCount = 0;
+			$rootScope.tipTotal = 0;
+			$rootScope.mealPrice = "";
+			$rootScope.taxRate = "";
+			$rootScope.tipPercent = "";
+			$rootScope.custSubtotal = "";
+			$rootScope.custTip = "";
+			$rootScope.custTotal = "";
+			$rootScope.tipTotal = "";
+			$rootScope.avgTip = "";			
 		};
-	});
+	}]);
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Waitstaff Calculator</title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body ng-class="{loading: isLoading}">
+	<h1>Waitstaff Calculator</h1>
+	<ul>
+		<li><a ng-href="#/">Home</a></li>
+		<li><a ng-href="#/meal">New Meal</a></li>
+		<li><a ng-href="#/earnings">My Earnings</a></li>
+	</ul><hr>
+	
+	<div class="animateViewContainer">
+    	<div ng-view style="border: none;" class="animateView"></div>
+	</div>
+
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="module.js"></script>
+	<script src="../lib/angular-messages.min.js"></script>
+
+</body>
+</html>
