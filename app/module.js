@@ -37,37 +37,37 @@ angular.module('myApp', ['ngRoute', 'ngAnimate'])
 		$rootScope.redBox = false;
 		$rootScope.mealCount = 0;
 		$rootScope.tipTotal = 0;
-		$rootScope.formSubmit = function() {
-			if( $rootScope.myForm.$valid ) {
+		$scope.formSubmit = function() {
+			if( $scope.myForm.$valid ) {
 				console.log('form is valid');
 				$rootScope.mealCount++;
-				var tax = $rootScope.taxRate/100;
-				var tip = $rootScope.tipPercent/100;
-				$rootScope.custSubtotal = ($rootScope.mealPrice * tax) + $rootScope.mealPrice;
-				$rootScope.custTip = $rootScope.custSubtotal * tip;
-				$rootScope.custTotal = $rootScope.custSubtotal + $rootScope.custTip;
-				$rootScope.tipTotal += $rootScope.custTip
-				$rootScope.avgTip = ($rootScope.tipTotal / $rootScope.mealCount);
-				$rootScope.mealPrice = "";
-				$rootScope.taxRate = "";
-				$rootScope.tipPercent = "";
-				$rootScope.myForm.$setPristine();
+				var tax = $scope.taxRate/100;
+				var tip = $scope.tipPercent/100;
+				$scope.custSubtotal = ($scope.mealPrice * tax) + $scope.mealPrice;
+				$scope.custTip = $scope.custSubtotal * tip;
+				$scope.custTotal = $scope.custSubtotal + $scope.custTip;
+				$scope.mealPrice = "";
+				$scope.taxRate = "";
+				$scope.tipPercent = "";
+				$scope.myForm.$setPristine();
 			} else {
 				console.log('form is not valid');
 				$rootScope.redBox = true;
 			}
 		};
 		$rootScope.cancelMeal = function() {
-			$rootScope.myForm.$setPristine();
+			$scope.myForm.$setPristine();
 			$rootScope.redBox = false;
-			$rootScope.mealPrice = "";
-			$rootScope.taxRate = "";
-			$rootScope.tipPercent = "";
+			$scope.mealPrice = "";
+			$scope.taxRate = "";
+			$scope.tipPercent = "";
 		};
 
 	}]).controller('EarningsCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+		$rootScope.tipTotal += $rootScope.custTip
+		$rootScope.avgTip = ($rootScope.tipTotal / $rootScope.mealCount);
 
-			$rootScope.reset = function() {
+		$rootScope.reset = function() {
 			$rootScope.redBox = false;
 			$rootScope.mealCount = 0;
 			$rootScope.tipTotal = 0;

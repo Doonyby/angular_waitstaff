@@ -1,9 +1,7 @@
-<section>
-	<div class="boxes" id="myEarnings">
-		<h2>My Earnings Info</h2><hr>
-		<h4>Tip Total: ${{ vm.tipTotal | number:2 }}</h4>
-		<h4>Meal Count: {{ vm.mealCount }}</h4>
-		<h4>Average Tip Per Meal: ${{ vm.avgTip | number:2 }}</h4>
-	</div>
-	<div class="boxes" id="reset"><button id="resetBtn" ng-click="vm.reset()">Reset</button></div>
-</section>
+<div class="boxes" id="myEarnings">
+	<h2>My Earnings Info</h2><hr>
+	<h4>Tip Total: ${{ tipTotal | number:2 }}</h4>
+	<h4>Meal Count: {{ mealCount }}</h4>
+	<h4>Average Tip Per Meal: ${{ avgTip | number:2 }}</h4>
+</div>
+<div class="boxes" id="reset"><button id="resetBtn" ng-click="reset()">Reset</button></div>
