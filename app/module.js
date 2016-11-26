@@ -28,57 +28,44 @@ angular.module('myApp', ['ngRoute', 'ngAnimate'])
 	        $rootScope.isLoading = false;
 	      }, 1000);
 	    });
+		$rootScope.mealCount = 0;
+		$rootScope.tipTotal = 0;
+		$rootScope.avgTip = 0;	    
 	})
 	.controller('HomeCtrl', ['$rootScope', function($rootScope) {
 
 	}])
 	.controller('MealCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
-		
-		$rootScope.redBox = false;
-		$rootScope.mealCount = 0;
-		$rootScope.tipTotal = 0;
+
 		$scope.formSubmit = function() {
 			if( $scope.myForm.$valid ) {
-				console.log('form is valid');
 				$rootScope.mealCount++;
 				var tax = $scope.taxRate/100;
 				var tip = $scope.tipPercent/100;
 				$scope.custSubtotal = ($scope.mealPrice * tax) + $scope.mealPrice;
 				$scope.custTip = $scope.custSubtotal * tip;
+				$rootScope.tipTotal += $scope.custTip;
+				$rootScope.avgTip = ($rootScope.tipTotal / $rootScope.mealCount);
 				$scope.custTotal = $scope.custSubtotal + $scope.custTip;
 				$scope.mealPrice = "";
 				$scope.taxRate = "";
 				$scope.tipPercent = "";
 				$scope.myForm.$setPristine();
-			} else {
-				console.log('form is not valid');
-				$rootScope.redBox = true;
 			}
 		};
-		$rootScope.cancelMeal = function() {
+		$scope.cancelMeal = function() {
 			$scope.myForm.$setPristine();
-			$rootScope.redBox = false;
 			$scope.mealPrice = "";
 			$scope.taxRate = "";
 			$scope.tipPercent = "";
 		};
 
 	}]).controller('EarningsCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
-		$rootScope.tipTotal += $rootScope.custTip
-		$rootScope.avgTip = ($rootScope.tipTotal / $rootScope.mealCount);
-
-		$rootScope.reset = function() {
-			$rootScope.redBox = false;
+		
+		$scope.reset = function() {
 			$rootScope.mealCount = 0;
 			$rootScope.tipTotal = 0;
-			$rootScope.mealPrice = "";
-			$rootScope.taxRate = "";
-			$rootScope.tipPercent = "";
-			$rootScope.custSubtotal = "";
-			$rootScope.custTip = "";
-			$rootScope.custTotal = "";
-			$rootScope.tipTotal = "";
-			$rootScope.avgTip = "";			
+			$rootScope.avgTip = 0;			
 		};
 	}]);
 

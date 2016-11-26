@@ -118,3 +118,7 @@ li {
 .animateView.ng-leave.ng-leave-active { 
   margin-top: 800px;
 }
+
+.errorMsg {
+	color: red;
+}

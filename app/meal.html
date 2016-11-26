@@ -4,7 +4,7 @@
 		<h4>Base Meal Price: $<input type="number" name="mealPrice" ng-model="mealPrice" required/></h4><br>
 		<h4>Tax Rate: %<input type="number" name="taxRate" ng-model="taxRate"  required/></h4><br>
 		<h4>Tip Percentage: %<input type="number" name="tipPercent" ng-model="tipPercent" required/></h4><br>
-		<p ng-show="redBox" style="color: red;">* Red boxes are required.</p>
+		<p ng-show="myForm.$submitted && !myForm.$valid" class="errorMsg">* Red boxes are required.</p>
 		<span><button type="submit" id="submitBtn">Submit</button><button type="reset" id="cancelBtn" ng-click="cancelMeal()">Cancel</button></span>		
 	</form>
 </div>
